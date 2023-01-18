@@ -1,39 +1,15 @@
-"""
-# A datamodule encapsulates the five steps involved in data processing in PyTorch:
-
-# -- Download / tokenize / process.
-
-# -- Clean and (maybe) save to disk.
-
-# -- Load inside Dataset.
-
-# -- Apply transforms (rotate, tokenize, etc…).
-
-# -- Wrap inside a DataLoader.
-
-Why do I need a DataModule?
-In normal PyTorch code, the data cleaning/preparation is usually scattered across many files. This makes sharing and reusing the exact splits and transforms across projects impossible.
-
-Datamodules are for you if you ever asked the questions:
-
-what splits did you use?
-
-what transforms did you use?
-
-what normalization did you use?
-
-how did you prepare/tokenize the data?
-"""
 # https://github.com/Lightning-AI/lightning-bolts/tree/master/pl_bolts/datamodules
 # https://pytorch-lightning.readthedocs.io/en/latest/data/datamodule.html#prepare-data-per-node
 
-import sys, functools, operator, logging, os, json
-from argparse import ArgumentParser
-from pathlib import Path
+import functools
+import json
+import logging
+import operator
+import sys
 from datetime import datetime
-from typing import Any, Callable, Optional
-from pytorch_lightning import LightningDataModule
+from pathlib import Path
 
+from loggers import create_python_logger
 from monai.data import (
     PersistentDataset,
     DataLoader,
@@ -42,22 +18,16 @@ from monai.data import (
 )
 from monai.transforms import (
     AddChanneld,
-    AsChannelFirstd,
     Compose,
     CropForegroundd,
     LoadImaged,
-    NormalizeIntensityd,
     Orientationd,
-    RandCropByPosNegLabeld,
     RandSpatialCropSamplesd,
     ScaleIntensityRanged,
-    Spacingd,
     SpatialPadd,
     ToTensord,
 )
-
-
-from loggers import create_python_logger
+from pytorch_lightning import LightningDataModule
 
 logger = create_python_logger(__name__, level=logging.INFO)
 
