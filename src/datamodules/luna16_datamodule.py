@@ -4,8 +4,39 @@ import random
 import numpy as np
 import torch
 import torchio.transforms
+from pytorch_lightning import LightningDataModule
 from scipy.special import comb
 from torch.utils.data import Dataset
+
+
+class Luna16DataModule(LightningDataModule):
+    def __init__(self, args, *super_args, **super_kwargs):
+        super().__init__(*super_args, **super_kwargs)
+        self.args = args
+        self.train_ds = None  # datasets assigned within setup
+        self.val_ds = None  # datasets assigned within setup
+        self.save_hyperparameters()
+
+    def prepare_data(self):
+        pass
+
+    def setup(self, stage: str) -> None:
+        # create train, val, test datasets here
+        # create folds here
+
+        pass
+
+    def val_transforms(self):
+        pass
+
+    def train_transforms(self):
+        pass
+
+    def train_dataloader(self):
+        pass
+
+    def val_dataloader(self):
+        pass
 
 
 class Pcrlv2LunaPretask(Dataset):
@@ -277,3 +308,7 @@ class Pcrlv2LunaPretask(Dataset):
             ]
             cnt -= 1
         return x
+
+
+if __name__ == "__main__":
+    pass
