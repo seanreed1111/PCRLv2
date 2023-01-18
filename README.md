@@ -54,7 +54,7 @@ weight_path = './pretrained_weight/simance_multi_crop_luna_pretask_1.0_240.pt'
 model_dict = torch.load(weight)['state_dict']
 model.load_state_dict(model_dict)
 ```
-
+----
 ## How to Perform Pre-training
 
 ### on NIH ChestX-ray
@@ -132,4 +132,7 @@ or
 ```
 bash run3d.sh
 ```
+----
+## How to Perform Fine-tuning
 
+Please refer to the [finetune](https://github.com/RL4M/PCRLv2/tree/finetune) branch!
