@@ -277,3 +277,7 @@ class Pcrlv2LunaPretask(Dataset):
             ]
             cnt -= 1
         return x
+
+
+if __name__ == "__main__":
+    dicom_dir = "/Users/seanreed/DATA/LIDC-IDRI-0001/01-01-2000-NA-NA-30178/3000566.000000-NA-03192"
